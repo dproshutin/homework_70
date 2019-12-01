@@ -5,7 +5,7 @@ const CalcButton = props => {
     return (
         <TouchableOpacity
             style={[styles.container, {backgroundColor: props.backgroundColor}]}
-            onPress={() => this.props.click(this.props.value)}
+            onPress={() => props.clicked(props.value)}
         >
             <Text style={styles.buttonText}>
                 {props.value}

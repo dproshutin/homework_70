@@ -9,9 +9,9 @@ class Calculator extends Component {
             <View style={styles.container}>
                 <View style={{flexDirection: "row", marginBottom: 10}}>
                     <TextInput
-                        // style={styles.input}
+                        style={styles.input}
                         // onChangeText={placeNameChangeHandler}
-                        // value={placeName}
+                        value={this.props.result}
                     />
                 </View>
                 <View style={styles.buttonsWrapper}>
@@ -19,62 +19,76 @@ class Calculator extends Component {
                         <CalcButton
                             value="1"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="2"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="3"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="+"
                             backgroundColor="lightgreen"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="&#60;"
                             backgroundColor="lightgreen"
+                            clicked={() => this.props.removeSymbol()}
                         />
                     </View>
                     <View style={styles.buttonsRow}>
                         <CalcButton
                             value="4"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="5"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="6"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="-"
                             backgroundColor="lightgreen"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
-                            value="M+"
+                            value="CE"
                             backgroundColor="lightgreen"
+                            clicked={() => this.props.removeAll()}
                         />
                     </View>
                     <View style={styles.buttonsRow}>
                         <CalcButton
                             value="7"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="8"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="9"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="*"
                             backgroundColor="lightgreen"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="M-"
@@ -85,22 +99,27 @@ class Calculator extends Component {
                         <CalcButton
                             value="."
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="0"
                             backgroundColor="lightblue"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
-                            value="%"
+                            value="&#8730;"
                             backgroundColor="lightgreen"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="/"
                             backgroundColor="lightgreen"
+                            clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
                             value="="
                             backgroundColor="orange"
+                            clicked={() => this.props.getResult("")}
                         />
                     </View>
                 </View>
@@ -108,6 +127,21 @@ class Calculator extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        result: state.result
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addSymbol: (value) => dispatch({type: "ADD", value}),
+        getResult: (value) => dispatch({type: "RESULT", value}),
+        removeSymbol: () => dispatch({type: "REMOVE"}),
+        removeAll: () => dispatch({type: "REMOVE_ALL"})
+    };
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -118,6 +152,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
+    },
+    input: {
+        borderColor: "#000",
+        borderWidth: 1,
+        padding: 5,
+        flex: 5,
+        marginRight: 5
     },
     buttonsWrapper: {
         // display: 'flex',
@@ -131,4 +172,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect()(Calculator)
+export default connect(mapStateToProps, mapDispatchToProps) (Calculator)
