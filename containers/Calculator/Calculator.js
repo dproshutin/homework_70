@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput} from "react-native";
 import {connect} from "react-redux";
 import CalcButton from "../../components/CalcButton/CalcButton";
+import {ADD, RESULT, REMOVE, REMOVE_ALL, SQUARE} from "../../store/actionTypes";
 
 class Calculator extends Component {
     render() {
@@ -136,11 +137,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addSymbol: (value) => dispatch({type: "ADD", value}),
-        getResult: (value) => dispatch({type: "RESULT", value}),
-        removeSymbol: () => dispatch({type: "REMOVE"}),
-        removeAll: () => dispatch({type: "REMOVE_ALL"}),
-        getSquared: () => dispatch({type: "SQUARE", value: "^2"})
+        addSymbol: (value) => dispatch({type: ADD, value}),
+        getResult: (value) => dispatch({type: RESULT, value}),
+        removeSymbol: () => dispatch({type: REMOVE}),
+        removeAll: () => dispatch({type: REMOVE_ALL}),
+        getSquared: () => dispatch({type: SQUARE, value: "^2"})
     };
 };
 
