@@ -17,7 +17,7 @@ const CalcButton = props => {
 const styles = StyleSheet.create({
     container: {
         margin: 1,
-        padding: 10,
+        padding: 20,
         borderRadius: 4,
         flex: 1,
         justifyContent: 'center',
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "#fff",
-        fontSize: 26
+        fontSize: 38
     }
 });
 

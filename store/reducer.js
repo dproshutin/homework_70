@@ -8,10 +8,12 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === "RESULT") {
         try {
+            const find = '\\^';
+            const re = new RegExp(find, 'g');
             if (state.result.charCodeAt(0) === 0x221A && state.result.slice(1) >=0) {
                 return {result: Math.sqrt(state.result.slice(1)) + action.value};
             }
-            return {result: eval(state.result) + action.value};
+            return {result: eval(state.result.replace(re, "**")) + action.value};
         } catch(e) {
             console.log('Error!');
             return {result: "ERROR"};
@@ -22,6 +24,9 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === "REMOVE_ALL") {
         return {result: ""};
+    }
+    if (action.type === "SQUARE") {
+        return {result: eval(state.result) + "^2"};
     }
     return state;
 };

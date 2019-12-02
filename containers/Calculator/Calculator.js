@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, View, TextInput} from "react-native";
 import {connect} from "react-redux";
 import CalcButton from "../../components/CalcButton/CalcButton";
 
@@ -7,10 +7,9 @@ class Calculator extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{flexDirection: "row", marginBottom: 10}}>
+                <View>
                     <TextInput
                         style={styles.input}
-                        // onChangeText={placeNameChangeHandler}
                         value={this.props.result}
                     />
                 </View>
@@ -91,8 +90,9 @@ class Calculator extends Component {
                             clicked={(value) => this.props.addSymbol(value)}
                         />
                         <CalcButton
-                            value="M-"
+                            value="x^2"
                             backgroundColor="lightgreen"
+                            clicked={() => this.props.getSquared()}
                         />
                     </View>
                     <View style={styles.buttonsRow}>
@@ -139,7 +139,8 @@ const mapDispatchToProps = dispatch => {
         addSymbol: (value) => dispatch({type: "ADD", value}),
         getResult: (value) => dispatch({type: "RESULT", value}),
         removeSymbol: () => dispatch({type: "REMOVE"}),
-        removeAll: () => dispatch({type: "REMOVE_ALL"})
+        removeAll: () => dispatch({type: "REMOVE_ALL"}),
+        getSquared: () => dispatch({type: "SQUARE", value: "^2"})
     };
 };
 
@@ -156,17 +157,19 @@ const styles = StyleSheet.create({
     input: {
         borderColor: "#000",
         borderWidth: 1,
-        padding: 5,
-        flex: 5,
-        marginRight: 5
+        paddingRight: 250,
+        paddingTop: 20,
+        paddingBottom: 20,
+        flex: 1,
+        fontSize: 40,
+        textAlign: "right"
     },
     buttonsWrapper: {
-        // display: 'flex',
-        flex: 1
-        // flexDirection: 'row'
+        display: 'flex',
+        flex: 1,
     },
     buttonsRow: {
-        // display: 'flex',
+        display: 'flex',
         flexDirection: 'row',
         flex: 1
     }
